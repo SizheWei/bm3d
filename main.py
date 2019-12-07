@@ -397,7 +397,7 @@ def PSNR(img1, img2):
 
 if __name__ == '__main__':
     cv2.setUseOptimized(True)  # OpenCV 中的很多函数都被优化过（使用 SSE2，AVX 等）。也包含一些没有被优化的代码。使用函数 cv2.setUseOptimized() 来开启优化。
-    img_name = "images/js_1.jpg"  # 图像的路径
+    img_name = "images/cats_s.jpg"  # 图像的路径
     ori = cv2.imread(img_name, cv2.IMREAD_GRAYSCALE)  # 读入图像，cv2.IMREAD_GRAYSCALE:以灰度模式读入图像
     cv2.imwrite("results/ori.jpg", ori)
     img = Gauss_noise(ori)

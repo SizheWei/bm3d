@@ -398,32 +398,37 @@ def PSNR(img1, img2):
 if __name__ == '__main__':
     cv2.setUseOptimized(True)  # OpenCV 中的很多函数都被优化过（使用 SSE2，AVX 等）。也包含一些没有被优化的代码。使用函数 cv2.setUseOptimized() 来开启优化。
     img_name = "images/cats_s.png"  # 图像的路径
-    ori = cv2.imread(img_name, cv2.IMREAD_GRAYSCALE)  # 读入图像，cv2.IMREAD_GRAYSCALE:以灰度模式读入图像
+    ori = cv2.imread(img_name)  # 读入图像，cv2.IMREAD_GRAYSCALE:以灰度模式读入图像
     cv2.imwrite("results/ori.jpg", ori)
-    img = Gauss_noise(ori)
-    cv2.imwrite("results/noise.jpg", img)
+    oriYUV = cv2.cvtColor(ori, cv2.COLOR_BGR2YUV)
+    yImg, uImg, vImg = cv2.split(oriYUV)
 
-    print('The PSNR After add noise %f' % PSNR(ori, img))
-    # 记录程序运行时间
-    e1 = cv2.getTickCount()  # cv2.getTickCount 函数返回从参考点到这个函数被执行的时钟数
-    # if(img is not None):
-    #     print("success")
-    Basic_img = BM3D_step1(img)
-    e2 = cv2.getTickCount()
-    time = (e2 - e1) / cv2.getTickFrequency()  # 计算函数执行时间
-    print ("The Processing time of the First step is %f s" % time)
-    cv2.imwrite("results/Basic3.jpg", Basic_img)
+    cv2.imshow(yImg)
 
-    print ("The PSNR between the two img of the First step is %f" % PSNR(ori, Basic_img))
+    # img = Gauss_noise(ori)
+    # cv2.imwrite("results/noise.jpg", img)
 
-    # Basic_img = cv2.imread("Basic3.jpg", cv2.IMREAD_GRAYSCALE)
+    # print('The PSNR After add noise %f' % PSNR(ori, img))
+    # # 记录程序运行时间
+    # e1 = cv2.getTickCount()  # cv2.getTickCount 函数返回从参考点到这个函数被执行的时钟数
+    # # if(img is not None):
+    # #     print("success")
+    # Basic_img = BM3D_step1(img)
+    # e2 = cv2.getTickCount()
+    # time = (e2 - e1) / cv2.getTickFrequency()  # 计算函数执行时间
+    # print ("The Processing time of the First step is %f s" % time)
+    # cv2.imwrite("results/Basic3.jpg", Basic_img)
 
-    Final_img = BM3D_2nd_step(Basic_img, img)
-    e3 = cv2.getTickCount()
-    time = (e3 - e2) / cv2.getTickFrequency()
-    print ("The Processing time of the Second step is %f s" % time)
-    cv2.imwrite("results/Final3.jpg", Final_img)
+    # print ("The PSNR between the two img of the First step is %f" % PSNR(ori, Basic_img))
 
-    print ("The PSNR between the two img of the Second step is %f" % PSNR(ori, Final_img))
-    time = (e3 - e1) / cv2.getTickFrequency()
-    print ("The total Processing time is %f s" % time)
+    # # Basic_img = cv2.imread("Basic3.jpg", cv2.IMREAD_GRAYSCALE)
+
+    # Final_img = BM3D_2nd_step(Basic_img, img)
+    # e3 = cv2.getTickCount()
+    # time = (e3 - e2) / cv2.getTickFrequency()
+    # print ("The Processing time of the Second step is %f s" % time)
+    # cv2.imwrite("results/Final3.jpg", Final_img)
+
+    # print ("The PSNR between the two img of the Second step is %f" % PSNR(ori, Final_img))
+    # time = (e3 - e1) / cv2.getTickFrequency()
+    # print ("The total Processing time is %f s" % time)
