@@ -397,7 +397,7 @@ def PSNR(img1, img2):
 
 if __name__ == '__main__':
     cv2.setUseOptimized(True)  # OpenCV 中的很多函数都被优化过（使用 SSE2，AVX 等）。也包含一些没有被优化的代码。使用函数 cv2.setUseOptimized() 来开启优化。
-    img_name = "images/js.jpg"  # 图像的路径
+    img_name = "images/js_1.jpg"  # 图像的路径
     ori = cv2.imread(img_name, cv2.IMREAD_GRAYSCALE)  # 读入图像，cv2.IMREAD_GRAYSCALE:以灰度模式读入图像
     cv2.imwrite("results/ori.jpg", ori)
     img = Gauss_noise(ori)
@@ -412,7 +412,7 @@ if __name__ == '__main__':
     e2 = cv2.getTickCount()
     time = (e2 - e1) / cv2.getTickFrequency()  # 计算函数执行时间
     print ("The Processing time of the First step is %f s" % time)
-    cv2.imwrite("Basic3.jpg", Basic_img)
+    cv2.imwrite("results/Basic3.jpg", Basic_img)
 
     print ("The PSNR between the two img of the First step is %f" % PSNR(ori, Basic_img))
 
@@ -422,7 +422,7 @@ if __name__ == '__main__':
     e3 = cv2.getTickCount()
     time = (e3 - e2) / cv2.getTickFrequency()
     print ("The Processing time of the Second step is %f s" % time)
-    cv2.imwrite("Final3.jpg", Final_img)
+    cv2.imwrite("results/Final3.jpg", Final_img)
 
     print ("The PSNR between the two img of the Second step is %f" % PSNR(ori, Final_img))
     time = (e3 - e1) / cv2.getTickFrequency()
