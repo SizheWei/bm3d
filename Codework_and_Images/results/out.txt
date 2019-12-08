@@ -1,0 +1,9 @@
+/Users/weisizhe/opt/anaconda3/bin/python /Users/weisizhe/Study/Projects/python/bm3d/main_modify.py
+The PSNR After add noise 20.320507
+The Processing time of the First step is 79.415085 s
+The PSNR between the two img of the First step is 28.026599
+The Processing time of the Second step is 318.802294 s
+The PSNR between the two img of the Second step is 28.236284
+The total Processing time is 398.217379 s
+
+Process finished with exit code 0
